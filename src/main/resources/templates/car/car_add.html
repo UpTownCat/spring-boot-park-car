@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>AddCar</title>
+    <div th:include="/base :: css"></div>
+    <div th:include="/base :: js"></div>
+    <script type="text/javascript">
+        $(function () {
+            $("button").click(function () {
+                if(common.validInput("#vm")) {
+                    $("#vm").submit()
+                }
+            })
+            var vm = new Vue({
+                el: "#vm",
+                data: {
+                    branch: "33",
+                    plate: "",
+                    photo: ""
+                }
+            });
+            common.previewPhoto("input[type=file]", "#photo")
+        })
+    </script>
+</head>
+<body>
+    <div th:include="/base :: head"></div>
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+            <div class="uk-width-2-3">
+                <form class="uk-form uk-form-stacked" enctype="multipart/form-data" action="/cars/" method="post" id="vm">
+                    <div class="uk-form-row">
+                        <label class="uk-form-label">品牌：</label>
+                        <input v-model="branch" type="text" name="branch" class="uk-width-1-1"/>
+                    </div>
+                    <div class="uk-form-row">
+                        <label class="uk-form-label">车牌：</label>
+                        <input v-model="plate" type="text" name="plate" class="uk-width-1-1" />
+                    </div>
+                    <div class="uk-form-row">
+                        <label class="uk-form-label">图片：</label>
+                        <div class="uk-form-file">
+                            <input type="file" name="p" class="uk-width-1-1"/>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <img src="" id="photo"/>
+                    </div>
+                    <div class="uk-form-row">
+                        <button class="uk-button uk-button-primary" type="button"><i class="uk-icon-save"></i> 保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

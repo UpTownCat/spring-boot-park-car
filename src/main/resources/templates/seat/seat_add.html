@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add ParkingSeat</title>
+    <div th:include="/base :: css"></div>
+    <div th:include="/base :: js"></div>
+    <script type="text/javascript">
+        $(function () {
+            var vm = new Vue({
+                el: "#vm",
+                data: {
+                    placeId: "",
+                    sequenceNum: ""
+                },
+                methods: {
+                    submit: function (event) {
+                        event.preventDefault()
+                        var placeId = this.placeId
+                        var sequenceNum = this.sequenceNum
+                        if(!common.validInput("#vm"))
+                                return;
+                        if(placeId.trim().length == 0) {
+                            common.remind("停车场不能为空！")
+                            return ;
+                        }
+                        $.post("/seats/", {placeId: placeId, sequenceNum: sequenceNum, isAvailable: 1}, function (data) {
+                            if(data.state) {
+                                common.remind("添加成功！")
+                            }else {
+                                common.remind(data.message)
+                            }
+                        })
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div th:include="/base :: head"></div>
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+            <div class="uk-width-2-3">
+                <form id="vm" v-on="submit: submit" class="uk-form uk-form-stacked">
+                    <div class="uk-form-row">
+                        <label class="uk-form-label">编号：</label>
+                        <input v-model="sequenceNum" type="text" class="uk-width-1-1"/>
+                    </div>
+                    <div class="uk-form-row">
+                        <label class="uk-form-label">停车场：</label>
+                        <select v-model="placeId">
+                            <option selected="selected" value="">请选择</option>
+                            <option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+                        </select>
+                    </div>
+                    <div class="uk-form-row">
+                        <button class="uk-button uk-button-primary uk-width-1-4"><i class="uk-icon-save"></i> 保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

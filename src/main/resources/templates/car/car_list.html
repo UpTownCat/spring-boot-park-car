@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ListCar</title>
+    <div th:include="/base :: css"></div>
+    <div th:include="/base :: js"></div>
+</head>
+<body>
+    <div th:include="/base :: head"></div>
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <table class="uk-table">
+                    <tr th:each="car : ${cars}">
+                        <td>
+                            <label th:text="'品牌：' + ${car.branch}"></label>
+                            <br/>
+                            <label th:text="'车牌' + ${car.plate}"></label>
+                            <br/>
+                            <a class="uk-button uk-button-primary" href="#">查看照片</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

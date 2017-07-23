@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ListSeat</title>
+    <div th:include="/base :: css"></div>
+    <div th:include="/base :: js"></div>
+    <script type="text/javascript">
+        $(function () {
+            page.init(6, "")
+//            $(".parking").click(function () {
+//                var href = this.href
+//                var index = href.lastIndexOf("/")
+//                var seatId = href.substr(index + 1)
+//                var placeId = href.substr(href.indexOf("places") + 7, index)
+//                placeId  = placeId.substr(0, placeId.lastIndexOf("/"))
+//                var data = {
+//                    "parkingPlace.id": placeId,
+//                    "car.id": 17,
+//                    "owner.id": 1,
+//                    "price": 0,
+//                    "isAvailable": 0,
+//                    "seatId": seatId
+//                }
+//                $.post("/parkings/", data, function (d) {
+//                    if(d.state) {
+//                        $.confirm({
+//                            backgroundDismiss: false,
+//                            tilte: "提示",
+//                            content: "停车成功！",
+//                            buttons: {
+//                                "确定": function () {
+//                                    location.reload(false)
+//                                }
+//                            }
+//                        })
+//                    }
+//                })
+//                return false;
+//            })
+        })
+    </script>
+</head>
+<body>
+    <div th:include="/base :: head"></div>
+    <div class="uk-container uk-constainer-center">
+        <div class="uk-grid uk-grid-truncate">
+            <div class="uk-width-medium-1-4" th:each="seat : ${page.content}">
+                <div class="uk-panel uk-panel-hover uk-panel-box">
+                    <!--<div class="uk-badge uk-badge-notification">详情</div>-->
+                    <h3 class="uk-panel-title" th:text="'序号：' + ${seat.sequenceNum}"></h3>
+                    <a class="uk-button uk-button-primary parking" th:href="${seat.id}" th:if="${seat.isAvailable == 1}">停车</a>
+                    <button class="uk-button uk-button-primary" th:if="${seat.isAvailable == 0}" disabled="disabled">已被占用</button>
+                </div>
+            </div>
+        </div>
+        <ul class="pagination pull-right" id="pageContent"></ul>
+        <input type="hidden" id="index" th:field="${page.number}"/>
+        <input type="hidden" id="total" th:field="${page.totalPages}"/>
+    </div>
+    <button class="uk-button uk-button-success" data-uk-modal="{target:'#selectCarModal'">打开</button>
+    <div id="selectCarModal" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <a class="uk-modal-close uk-close"></a>
+            <div class="uk-modal-header">选择车辆</div>
+            <div class="uk-form-row">
+                <label class="uk-form-label">请选择车辆：</label>
+                <select >
+                    <option>ddddddddddddddddddd</option>
+                    <option>ddddddddddddddddddd</option>
+                    <option>ddddddddddddddddddd</option>
+                    <option>ddddddddddddddddddd</option>
+                </select>
+            </div>
+            <div class="uk-modal-footer">
+                <button class="uk-button uk-button-primary">确定</button>
+                <button class="uk-button uk-button-default">取消</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

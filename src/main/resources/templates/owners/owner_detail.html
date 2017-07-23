@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome</title>
+    <div th:include="/base :: css"></div>
+    <div th:include="/base :: js"></div>
+</head>
+<body>
+    <div th:include="/base :: head"></div>
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <table class="uk-table">
+                    <tr>
+                        <td>姓名：</td>
+                        <td th:text="${owner.name}"></td>
+                    </tr>
+                    <tr>
+                        <td>性别：</td>
+                        <td th:text="${owner.gender} == '1' ? '女' : '男'"></td>
+                    </tr>
+                    <tr>
+                        <td>电话：</td>
+                        <td th:text="${owner.phone}"></td>
+                    </tr>
+                    <tr>
+                        <td>账户余额：</td>
+                        <td th:text="${owner.balance}"></td>
+                    </tr>
+                </table>
+                <a class="uk-button uk-button-primary uk-width-1-4"><i class="uk-icon-user"></i>修改个人信息</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

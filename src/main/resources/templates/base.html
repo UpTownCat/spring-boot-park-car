@@ -1,0 +1,77 @@
+<div th:fragment="css">
+    <link rel="stylesheet" type="text/css" href="/css/uikit.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/uikit.gradient.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/jquery-confirm.css"/>
+</div>
+<div th:fragment="js">
+    <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/js/uikit.min.js"></script>
+    <script type="text/javascript" src="/js/uikit-icons.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/vue.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-confirm.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/page.js"></script>
+</div>
+
+<div th:fragment="head">
+    <!--<nav class="uk-navbar uk-navbar-attached uk-margin-bottom">-->
+        <!--<div class="uk-container uk-container-center">-->
+            <!--<a href="/" class="uk-navbar-brand">Parking</a>-->
+            <!--<ul class="uk-navbar-nav">-->
+                <!--<li data-url="blogs"><a href="/"><i class="uk-icon-home"></i> 主页</a></li>-->
+                <!--<li><a target="_blank" href="#"><i class="uk-icon-hand-o-right"></i> 添加停车场</a></li>-->
+                <!--<li><a target="_blank" href="#"><i class="uk-icon-code"></i> 个人中心</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</nav>-->
+    <!--<nav class="uk-navbar">-->
+        <!--<a class="uk-navbar-brand" href="#">Brand</a>-->
+        <!--<ul class="uk-navbar-nav">-->
+            <!--<li>-->
+                <!--<a>hello</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a>hello</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a>hello</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</nav>-->
+    <!--<nav class="navbar navbar-inverse navbar-static-top">-->
+        <!--<div class="container">-->
+            <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+            <!--<div class="navbar-header">-->
+                <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">-->
+                    <!--<span class="sr-only">Toggle navigation</span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                <!--</button>-->
+                <!--<a class="navbar-brand" href="#">停车管理系统</a>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+            <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+                <!--<ul class="nav navbar-nav navbar-right">-->
+                    <!--<li><a href="#parking_place_modal" data-toggle="modal">添加停车场</a></li>-->
+                    <!--<li><a href="#car_modal" data-toggle="modal">添加车辆</a></li>-->
+                    <!--<li><a href="#car_owner_modal" data-toggle="modal">注册</a></li>-->
+                    <!--<li class="dropdown">-->
+                        <!--<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--<li><a th:href="@{/owners/}">我的资料</a></li>-->
+                            <!--<li><a href="${basePath}/car/list?ownerId=${sessionScope.owner.id}">我的车辆</a></li>-->
+                            <!--<li><a href="#">修改密码</a></li>-->
+                            <!--<li role="separator" class="divider"></li>-->
+                            <!--<li><a href="#">停车记录</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+        <!--</div>&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+    <!--</nav>-->
+
+</div>

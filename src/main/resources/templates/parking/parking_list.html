@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ParkingList</title>
+    <div th:include="/base :: css"></div>
+    <div th:include="/base :: js"></div>
+    <script type="text/javascript">
+        $(function () {
+            page.init(6, "")
+        })
+    </script>
+</head>
+<body>
+    <div th:include="/base :: head"></div>
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid uk-grid-truncate">
+            <div class="uk-width-medium-1-1" th:each="parking : ${page.content}">
+                <div class="uk-panel uk-panel-hover uk-panel-box">
+                    <!--<div class="uk-badge uk-badge-notification">详情</div>-->
+                    <h3 class="uk-panel-title" th:text="'停车场：' + ${parking.parkingPlace.name}"></h3>
+                    <span th:text="'车辆：' + ${parking.car.plate}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span th:text="'花费：' + ${parking.price}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span th:text="'进入时间：' + ${parking.inTime}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span th:text="'结束时间：' + ${parking.outTime == null ? '' : parking.outTime}"></span>
+                    <span th:if="${parking.outTime}" class="uk-float-right">
+                        <a th:href="'/parkings/' + ${parking.id}" class="uk-button uk-button-primary">详情</a>
+                    </span>
+                    <span th:if="${parking.outTime == null}" class="uk-float-right">
+                        <a th:href="'/parkings/' + ${parking.id}" class="uk-button uk-button-success">结束停车</a>
+                    </span>
+                </div>
+            </div>
+            <ul id="pageContent" class="pagination pull-right"></ul>
+            <input type="hidden" id="index" th:field="${page.number}"/>
+            <input type="hidden" id="total" th:field="${page.totalPages}"/>
+        </div>
+    </div>
+</body>
+</html>
