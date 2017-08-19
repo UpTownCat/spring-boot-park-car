@@ -39,7 +39,6 @@ public class ParkingController {
     public StateDto createParking(Parking parking, @ModelAttribute ParkingSeat parkingSeat, Integer seatId) {
         StateDto stateDto = new StateDto();
         parkingSeat.setId(seatId);
-        System.out.println(seatId + "--------------" + parkingSeat.getIsAvailable());
         parkingService.createParking(parking, parkingSeat);
         stateDto.setState(true);
         return stateDto;

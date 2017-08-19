@@ -8,6 +8,9 @@ import com.example.dto.StateDto;
 import com.example.service.CarService;
 import com.example.service.OwnerService;
 import com.example.service.ParkingService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -80,14 +83,14 @@ public class OwnerController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public StateDto login(String phone, String password) {
-        StateDto stateDto = new StateDto();
-        boolean result = ownerService.validateOwner(phone, password);
-        if(result) {
-            stateDto.setState(true);
-        }else {
-            stateDto.setMessage("用户名或者密码错误！");
+    public String login(String phone, String password) {
+        UsernamePasswordToken token = new UsernamePasswordToken(phone, password);
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+        }catch (Exception e) {
+            return "redirect:/login";
         }
-        return stateDto;
+        return "redirect:/parkings/list?owner.id=1";
     }
 }

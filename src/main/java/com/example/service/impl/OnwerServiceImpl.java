@@ -26,4 +26,9 @@ public class OnwerServiceImpl implements OwnerService{
     public Owner getOwnerById(Integer id) {
         return ownerDao.findOne(id);
     }
+
+    @Override
+    public Owner getOwnerByPhone(String phone) {
+        return ownerDao.findByPhone(phone);
+    }
 }
