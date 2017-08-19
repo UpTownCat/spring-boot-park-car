@@ -1,16 +1,16 @@
 package com.example.bean;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/7/7.
  */
 @Entity
-public class Owner {
+public class Owner implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,17 +28,17 @@ public class Owner {
 
     private Double balance;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "owner", fetch = FetchType.EAGER)
-    @NotFound(action = NotFoundAction.IGNORE)
-    private List<Car> cars;
+//    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "owner", fetch = FetchType.EAGER)
+//    @Transient
+//    private List<Car> cars;
 
-    public List<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
-    }
+//    public List<Car> getCars() {
+//        return cars;
+//    }
+//
+//    public void setCars(List<Car> cars) {
+//        this.cars = cars;
+//    }
 
     public Integer getId() {
         return id;

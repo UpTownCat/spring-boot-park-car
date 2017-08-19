@@ -32,7 +32,7 @@ public class ParkingDaoTest {
 
     @Test
     public void save() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 1; i++) {
             Parking parking = new Parking();
             parking.setInTime(new Date());
             parking.setPrice(200.0);
@@ -46,6 +46,7 @@ public class ParkingDaoTest {
             parkingPlace.setId(1);
             parking.setParkingPlace(parkingPlace);
             parkingDao.save(parking);
+            System.out.println(parking.getId() + "----------------------------------");
         }
     }
 

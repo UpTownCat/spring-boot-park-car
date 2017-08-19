@@ -1,22 +1,23 @@
 package com.example.bean;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/7/7.
  */
 @Entity
-public class ParkingSeat {
+public class ParkingSeat implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "place_id")
     private ParkingPlace parkingPlace;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
     private Car car;
 

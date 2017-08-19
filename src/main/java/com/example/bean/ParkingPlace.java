@@ -1,12 +1,13 @@
 package com.example.bean;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/7/7.
  */
 @Entity
-public class ParkingPlace {
+public class ParkingPlace implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

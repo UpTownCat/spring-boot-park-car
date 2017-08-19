@@ -24,11 +24,11 @@ public class OwnerDaoTest {
 
     @Test
     public void testSelect() {
-        int id = 1;
-        Owner owner = ownerDao.findOne(id);
-        List<Car> cars = owner.getCars();
-        for (int i = 0; i < cars.size(); i++) {
-            System.out.println(cars.get(i).getPlate());
-        }
+//        int id = 1;
+//        Owner owner = ownerDao.findOne(id);
+////        List<Car> cars = owner.getCars();
+//        for (int i = 0; i < cars.size(); i++) {
+//            System.out.println(cars.get(i).getPlate());
+//        }
     }
 }

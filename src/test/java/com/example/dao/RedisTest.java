@@ -6,7 +6,9 @@ import com.dyuproject.protostuff.runtime.RuntimeSchema;
 import com.example.App;
 import com.example.bean.Owner;
 import com.example.bean.Parking;
+import com.example.bean.ParkingSeat;
 import com.example.config.MyRedisPool;
+import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +35,16 @@ public class RedisTest {
     private RedisTemplate redisTemplate;
 
     @Autowired
+    private ParkingSeatDao parkingSeatDao;
+
+    @Autowired
     MyRedisPool pool;
 
     @Autowired
     ParkingRedisDao redisDao;
+
+    @Autowired
+    private ParkingDao parkingDao;
 
     RuntimeSchema<Parking> schema = RuntimeSchema.createFrom(Parking.class);
 
@@ -50,7 +58,7 @@ public class RedisTest {
         try {
             ProtostuffIOUtil.mergeFrom(bytes, parking, schema);
             System.out.println(parking.getPrice() + "------------------");
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -71,22 +79,39 @@ public class RedisTest {
 
     @Test
     public void testObj() throws Exception {
-        Owner user=new Owner();
+        Owner user = new Owner();
         user.setName("Uptowncat");
         user.setId(3);
         user.setEmail("1234234234@qq.com");
-        ValueOperations<String, Owner> operations=redisTemplate.opsForValue();
+        ValueOperations<String, Owner> operations = redisTemplate.opsForValue();
         operations.set("com.neox", user);
-        operations.set("com.neo.f", user,1, TimeUnit.SECONDS);
+        operations.set("com.neo.f", user, 1, TimeUnit.SECONDS);
         Thread.sleep(1000);
         //redisTemplate.delete("com.neo.f");
-        boolean exists=redisTemplate.hasKey("com.neo.f");
-        if(exists){
+        boolean exists = redisTemplate.hasKey("com.neo.f");
+        if (exists) {
             System.out.println("exists is true");
-        }else{
+        } else {
             System.out.println("exists is false");
         }
         // Assert.assertEquals("aa", operations.get("com.neo.f").getUserName());
+    }
+
+    @Test
+    public void testSaveSeat() {
+        int id = 9;
+        ParkingSeat parkingSeat = parkingSeatDao.findOne(id);
+        Parking parking = new Parking();
+        parking.setInTime(new Date());
+        parking.setCar(parkingSeat.getCar());
+        parking.setParkingPlace(parkingSeat.getParkingPlace());
+        parking.setPrice(10.0);
+        parkingDao.save(parking);
+        Gson gson = new Gson();
+        String json = gson.toJson(parking);
+        redisTemplate.opsForValue().set("parking:" + parking.getId(), json, 1, TimeUnit.MINUTES);
+        Parking parking1 = gson.fromJson(json, Parking.class);
+        System.out.println(parking1.getCar().getOwner().getName());
     }
 }
 

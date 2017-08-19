@@ -1,12 +1,13 @@
 package com.example.bean;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/7/7.
  */
 @Entity
-public class Car {
+public class Car implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +19,7 @@ public class Car {
 
     private String photo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="owner_id")
     private Owner owner;
 
